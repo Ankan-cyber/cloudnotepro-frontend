@@ -1,5 +1,7 @@
 import NoteContext from "./noteContext";
 import { useState } from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const NoteState = (props) => {
     const host = "http://localhost:5000"
@@ -24,27 +26,25 @@ const NoteState = (props) => {
     const addNote = async (title, description, tag) => {
 
         //Api Call
-        try {
-            const response = await fetch(`${host}/api/notes/add`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNjNjZlMWFkYjgzZWU1MTc5MWEwYzA1In0sImlhdCI6MTY3NDAzNjAwMn0.LenvIfi2bc4r1LmJD24Q-4E_0j7QYfMs9CbWg_YsHZE'
-                },
-                body: JSON.stringify({ title, description, tag })
-            });
-            const json = await response.json();
-            if (json.errors === undefined) {
-                setNotes(notes.concat(json.savedNote))
-            }
-            else {
-                json.errors.map((e) => {
-                    return console.log(e.msg)
-                })
-            }
-
-        } catch (error) {
-            console.log(error)
+        const response = await fetch(`${host}/api/notes/add`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNjNjZlMWFkYjgzZWU1MTc5MWEwYzA1In0sImlhdCI6MTY3NDAzNjAwMn0.LenvIfi2bc4r1LmJD24Q-4E_0j7QYfMs9CbWg_YsHZE'
+            },
+            body: JSON.stringify({ title, description, tag })
+        });
+        const json = await response.json();
+        if (json.errors === undefined) {
+            setNotes(notes.concat(json.savedNote))
+        }
+        else {
+            json.errors.map((e) => {
+                return toast.error(e.msg, {
+                    theme: "light",
+                    autoClose: 3000
+                });
+            })
         }
     }
 
