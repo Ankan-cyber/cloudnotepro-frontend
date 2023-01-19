@@ -37,6 +37,10 @@ const NoteState = (props) => {
         const json = await response.json();
         if (json.errors === undefined) {
             setNotes(notes.concat(json.savedNote))
+            toast.success("Note Added Succesfully",{
+                theme: "light",
+                autoClose: 3000
+            })
         }
         else {
             json.errors.map((e) => {
@@ -59,8 +63,11 @@ const NoteState = (props) => {
             },
         });
         const json = await response.json();
-        console.log(json)
-        const newNotes = notes.filter((note) => { return note._id !== id })
+        toast.success(json.Success,{
+            theme: "light",
+            autoClose: 3000
+        })
+        let newNotes = notes.filter((note) => { return note._id !== id })
         setNotes(newNotes)
     }
 
@@ -77,17 +84,25 @@ const NoteState = (props) => {
             body: JSON.stringify({ title, description, tag })
         });
         const json = await response.json();
-        console.log(json)
+        if(json.updatedNote!==null){
+            toast.success("Succesfully Edited Note",{
+                theme: "light",
+                autoClose: 3000
+            })
+        }
 
+        let newNotes = JSON.parse(JSON.stringify(notes));
         //Logic to edit in client
-        for (let i = 0; i < notes.length; i++) {
-            const element = notes[i];
+        for (let i = 0; i < newNotes.length; i++) {
+            const element = newNotes[i];
             if (element._id === id) {
-                element.title = title;
-                element.description = description;
-                element.tag = tag;
+                newNotes[i].title = title;
+                newNotes[i].description = description;
+                newNotes[i].tag = tag;
+                break;
             }
         }
+        setNotes(newNotes)
     }
 
     return (
