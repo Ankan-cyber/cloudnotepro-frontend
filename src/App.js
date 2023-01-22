@@ -8,7 +8,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 
 function App() {
-  const apiHost = "http://192.168.0.101:5000" 
+  const apiHost = "http://44.210.128.8:5000" 
   return (
     <>
       <NoteState>
