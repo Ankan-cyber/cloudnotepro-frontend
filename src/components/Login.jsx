@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = (props) => {
 
     const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("http://192.168.0.101:5000/api/auth/login", {
+        const response = await fetch(`${props.apiHost}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

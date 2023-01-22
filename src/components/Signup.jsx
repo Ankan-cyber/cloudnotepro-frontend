@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
-const Signup = () => {
+const Signup = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -20,7 +20,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (cpassword === password) {
-      const response = await fetch("http://192.168.0.101:5000/api/auth/signup", {
+      const response = await fetch(`${props.apiHost}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

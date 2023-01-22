@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 
 function App() {
+  const apiHost = "http://192.168.0.101:5000" 
   return (
     <>
       <NoteState>
@@ -17,8 +18,8 @@ function App() {
             <Routes>
               <Route exact path='/' element={< Home />}></Route>
               <Route exact path='/about' element={< About />}></Route>
-              <Route exact path='/login' element={< Login />}></Route>
-              <Route exact path='/signup' element={< Signup />}></Route>
+              <Route exact path='/login' element={< Login apiHost={apiHost}/>}></Route>
+              <Route exact path='/signup' element={< Signup apiHost={apiHost}/>}></Route>
             </Routes>
           </div>
         </Router>
