@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const NoteState = (props) => {
-    const host = "http://44.210.128.8/:5000"
+    const host = "http://localhost:5000"
     const [notes, setNotes] = useState([]);
 
     // Add a note

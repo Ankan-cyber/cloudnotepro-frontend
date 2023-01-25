@@ -4,11 +4,10 @@ import Home from './components/Home';
 import About from './components/About';
 import Navbar from './components/Navbar'
 import NoteState from './context/notes/NoteState';
-import Login from './components/Login';
-import Signup from './components/Signup';
+import Auth from './components/Auth';
 
 function App() {
-  const apiHost = "http://44.210.128.8:5000" 
+  const apiHost = "http://localhost:5000"
   return (
     <>
       <NoteState>
@@ -18,8 +17,7 @@ function App() {
             <Routes>
               <Route exact path='/' element={< Home />}></Route>
               <Route exact path='/about' element={< About />}></Route>
-              <Route exact path='/login' element={< Login apiHost={apiHost}/>}></Route>
-              <Route exact path='/signup' element={< Signup apiHost={apiHost}/>}></Route>
+              <Route exact path='/auth' element={< Auth apiHost={apiHost} />}></Route>
             </Routes>
           </div>
         </Router>

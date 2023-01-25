@@ -11,17 +11,17 @@ const Navbar = () => {
     }, [location]);
     const handleLogout = () => {
         localStorage.removeItem('token');
-        navigate('/login')
+        navigate('/auth')
     }
 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
             <div className="container-fluid">
-                <Link className="navbar-brand" to="/">CloudNotePro</Link>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <Link className="navbar-brand" to="/" style={{ margin: "auto" }}>CloudNotePro</Link>
+                <button className="navbar-toggler mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <div className="collapse mx-4 navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
                             <Link className={`nav-link ${location.pathname === "/" ? 'active' : ''}`} aria-current="page" to="/">Home</Link>
@@ -31,10 +31,7 @@ const Navbar = () => {
                         </li>
                     </ul>
                     {!localStorage.getItem('token') ?
-                        <div className="d-flex">
-                            <Link className="btn btn-success mx-2" to="/login" role="button">Login</Link>
-                            <Link className="btn btn-success mx-1" to="/signup" role="button">Signup</Link>
-                        </div> : <button className='btn btn-success' onClick={handleLogout}>Logout</button>}
+                        '' : <button className='btn btn-primary' onClick={handleLogout}>Logout</button>}
                 </div>
             </div>
         </nav>

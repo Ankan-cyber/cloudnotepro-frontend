@@ -25,7 +25,7 @@ const AddNote = () => {
   return (
     <>
         <div className="container">
-        <h2 className="py-4">Add A Note</h2>
+        <h2 className="py-4">Add Note</h2>
         <form className="my-3">
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Title</label>
