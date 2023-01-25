@@ -18,6 +18,8 @@ const Auth = (props) => {
             fetch(`${props.apiHost}`, {
                 method: 'GET'
             });
+
+            document.title = "Login / Signup - CLoudNote Pro"
         }
         // eslint-disable-next-line
     }, [navigate])

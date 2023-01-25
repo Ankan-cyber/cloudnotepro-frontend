@@ -17,7 +17,7 @@ const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
             <div className="container-fluid">
-                <Link className="navbar-brand" to="/" style={{ margin: "auto" }}>CloudNotePro</Link>
+                <Link className="navbar-brand" to="/" style={{ margin: "auto", paddingLeft: "28px" }}>CloudNotePro</Link>
                 <button className="navbar-toggler mx-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

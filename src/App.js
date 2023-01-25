@@ -5,6 +5,7 @@ import About from './components/About';
 import Navbar from './components/Navbar'
 import NoteState from './context/notes/NoteState';
 import Auth from './components/Auth';
+import Footer from './components/Footer';
 
 function App() {
   const apiHost = "http://localhost:5000"
@@ -20,6 +21,7 @@ function App() {
               <Route exact path='/auth' element={< Auth apiHost={apiHost} />}></Route>
             </Routes>
           </div>
+          <Footer/>
         </Router>
       </NoteState>
     </>
