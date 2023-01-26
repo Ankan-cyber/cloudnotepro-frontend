@@ -2,6 +2,9 @@ import React, { useContext, useRef, useState } from 'react'
 import AddNote from './AddNote';
 import FetchNotes from './FetchNotes';
 import noteContext from '../context/notes/noteContext';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Notes = () => {
     const context = useContext(noteContext);
@@ -9,16 +12,26 @@ const Notes = () => {
     const ref = useRef(null)
     const refClose = useRef(null)
     const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" })
+    const [oldnote, setOldnote] = useState({ id: "", oldtitle: "", olddescription: "", oldtag: "" })
 
     const updateNote = (currentNote) => {
         ref.current.click();
+        setOldnote({ id: currentNote._id, oldtitle: currentNote.title, olddescription: currentNote.description, oldtag: currentNote.tag })
         setNote({ id: currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag })
     }
 
     const handleClick = (e) => {
         e.preventDefault();
-        editNote(note.id, note.etitle, note.edescription, note.etag)
-        refClose.current.click();
+        if (note.etitle !== oldnote.oldtitle || note.edescription !== oldnote.olddescription || note.etag !== oldnote.oldtag) {
+            editNote(note.id, note.etitle, note.edescription, note.etag)
+            refClose.current.click();
+        }
+        else {
+            toast.error("Change Something to update", {
+                theme: "colored",
+                autoClose: 3000
+            })
+        }
     }
 
     const onChange = (e) => {
@@ -31,7 +44,7 @@ const Notes = () => {
             </button>
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
-                    <div className="modal-content" style={{backgroundColor:"#1f2029",color:"#c4c3ca"}}>
+                    <div className="modal-content" style={{ backgroundColor: "#1f2029", color: "#c4c3ca" }}>
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">Edit Note</h5>
                             <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -44,7 +57,7 @@ const Notes = () => {
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="description" className="form-label">Description</label>
-                                    <input type="text" className="form-control" id="edescription" name="edescription" value={note.edescription} onChange={onChange} />
+                                    <textarea type="text" className="form-control" id="edescription" name="edescription" value={note.edescription} onChange={onChange}></textarea>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="tag" className="form-label">Tag</label>
@@ -55,11 +68,12 @@ const Notes = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" ref={refClose}>Close</button>
-                            <button onClick={handleClick} type="button" className="btn btn-primary" disabled={note.etitle.length<=3 && note.edescription.length<=5}>Update Note</button>
+                            <button onClick={handleClick} type="button" className="btn btn-primary" disabled={note.etitle.length <= 3 && note.edescription.length <= 5}>Update Note</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <ToastContainer />
             <FetchNotes editNote={updateNote} />
         </>
     )

@@ -71,24 +71,33 @@ const Auth = (props) => {
     const handleLogin = async (e) => {
         e.preventDefault();
         startLoading("Login");
-        const response = await fetch(`${props.apiHost}/api/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ "email": logemail, "password": logpassword })
-        });
-        const json = await response.json();
-        if (json.success) {
-            //redirect
-            stopLoading("Login");
-            localStorage.setItem('token', json.authtoken);
-            navigate('/');
+        try {
+            const response = await fetch(`${props.apiHost}/api/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "email": logemail, "password": logpassword })
+            });
+            const json = await response.json();
+            if (json.success) {
+                //redirect
+                stopLoading("Login");
+                localStorage.setItem('token', json.authtoken);
+                navigate('/');
+            }
+            else {
+                stopLoading("Login");
+                toast.error(json.error, {
+                    theme: "colored",
+                    autoClose: 3000
+                })
+            }
         }
-        else {
+        catch (err) {
             stopLoading("Login");
-            toast.error(json.error, {
-                theme: "light",
+            toast.error("Some error occured please try after some time", {
+                theme: "colored",
                 autoClose: 3000
             })
         }
@@ -114,14 +123,14 @@ const Auth = (props) => {
             else {
                 stopLoading("Signup");
                 toast.error(json.error, {
-                    theme: "light",
+                    theme: "colored",
                     autoClose: 3000
                 })
             }
         }
         else {
             toast.error("Password should be equal", {
-                theme: "light",
+                theme: "colored",
                 autoClose: 3000
             })
         }

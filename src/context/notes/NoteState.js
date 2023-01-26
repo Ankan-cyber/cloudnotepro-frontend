@@ -19,7 +19,15 @@ const NoteState = (props) => {
             },
         });
         const json = await response.json();
-        setNotes(json)
+        if (json.success) {
+            setNotes(json.notes)
+        }
+        else {
+            toast.error("Some error occured please try after some time", {
+                theme: "colored",
+                autoClose: 3000
+            })
+        }
     }
 
     // Add a note
@@ -35,17 +43,17 @@ const NoteState = (props) => {
             body: JSON.stringify({ title, description, tag })
         });
         const json = await response.json();
-        if (json.errors === undefined) {
+        if (json.success) {
             setNotes(notes.concat(json.savedNote))
-            toast.success("Note Added Succesfully",{
-                theme: "light",
+            toast.success("Note Added Succesfully", {
+                theme: "colored",
                 autoClose: 3000
             })
         }
         else {
             json.errors.map((e) => {
                 return toast.error(e.msg, {
-                    theme: "light",
+                    theme: "colored",
                     autoClose: 3000
                 });
             })
@@ -63,12 +71,20 @@ const NoteState = (props) => {
             },
         });
         const json = await response.json();
-        toast.success(json.Success,{
-            theme: "light",
-            autoClose: 3000
-        })
-        let newNotes = notes.filter((note) => { return note._id !== id })
-        setNotes(newNotes)
+        if (json.success) {
+            toast.success("Note has been deleted", {
+                theme: "colored",
+                autoClose: 3000
+            })
+            let newNotes = notes.filter((note) => { return note._id !== id })
+            setNotes(newNotes)
+        }
+        else {
+            toast.error(json.msg, {
+                theme: "colored",
+                autoClose: 3000
+            });
+        }
     }
 
     // Edit a Note
@@ -84,25 +100,30 @@ const NoteState = (props) => {
             body: JSON.stringify({ title, description, tag })
         });
         const json = await response.json();
-        if(json.updatedNote!==null){
-            toast.success("Succesfully Edited Note",{
-                theme: "light",
+        if (json.success) {
+            toast.success("Succesfully Edited Note", {
+                theme: "colored",
                 autoClose: 3000
             })
-        }
-
-        let newNotes = JSON.parse(JSON.stringify(notes));
-        //Logic to edit in client
-        for (let i = 0; i < newNotes.length; i++) {
-            const element = newNotes[i];
-            if (element._id === id) {
-                newNotes[i].title = title;
-                newNotes[i].description = description;
-                newNotes[i].tag = tag;
-                break;
+            let newNotes = JSON.parse(JSON.stringify(notes));
+            //Logic to edit in client
+            for (let i = 0; i < newNotes.length; i++) {
+                const element = newNotes[i];
+                if (element._id === id) {
+                    newNotes[i].title = title;
+                    newNotes[i].description = description;
+                    newNotes[i].tag = tag;
+                    break;
+                }
             }
+            setNotes(newNotes)
         }
-        setNotes(newNotes)
+        else {
+            toast.error(json.msg, {
+                theme: "colored",
+                autoClose: 3000
+            });
+        }
     }
 
     return (
