@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const NoteState = (props) => {
     const host = "http://localhost:5000"
     const [notes, setNotes] = useState([]);
+    const [loaded, setLoaded] = useState(false)
 
     // Add a note
     const fetchNotes = async () => {
@@ -20,9 +21,11 @@ const NoteState = (props) => {
         });
         const json = await response.json();
         if (json.success) {
+            setLoaded(true)
             setNotes(json.notes)
         }
         else {
+            setLoaded(true)
             toast.error("Some error occured please try after some time", {
                 theme: "colored",
                 autoClose: 3000
@@ -127,7 +130,7 @@ const NoteState = (props) => {
     }
 
     return (
-        <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, fetchNotes }}>
+        <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, fetchNotes, loaded }}>
             {props.children}
         </NoteContext.Provider>
     )
