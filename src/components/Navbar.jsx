@@ -9,9 +9,13 @@ const Navbar = () => {
         // eslint-disable-next-line
         { }
     }, [location]);
+
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/auth')
+    }
+    const handleAccount = () => {
+        navigate('/account')
     }
 
     return (
@@ -22,7 +26,7 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse mx-4 navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul className="navbar-nav me-auto mb-4 mb-lg-0">
                         <li className="nav-item">
                             <Link className={`nav-link ${location.pathname === "/" ? 'active' : ''}`} aria-current="page" to="/">Home</Link>
                         </li>
@@ -30,8 +34,16 @@ const Navbar = () => {
                             <Link className={`nav-link ${location.pathname === "/about" ? 'active' : ''}`} to="/about">About</Link>
                         </li>
                     </ul>
-                    {!localStorage.getItem('token') ?
-                        '' : <button className='btn btn-primary' onClick={handleLogout}>Logout</button>}
+                    <ul className="navbar-nav d-flex flex-row">
+                        <li className="nav-item">
+                            {!localStorage.getItem('token') ?
+                                '' : <img src="/account.svg" alt="account" id='account' className='mr-3' onClick={handleAccount} />}
+                        </li>
+                        <li className="nav-item">
+                            {!localStorage.getItem('token') ?
+                                '' : <button className='btn btn-primary' onClick={handleLogout}>Logout</button>}
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>

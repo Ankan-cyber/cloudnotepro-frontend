@@ -163,6 +163,7 @@ const Auth = (props) => {
                                                         <i className="input-icon uil uil-lock-alt"></i>
                                                     </div>
                                                     <button className="btn mt-4 button" onClick={handleLogin}>Login</button>
+                                                    {/* <p class="mb-0 mt-4 text-center"><a href="#0" class="link" style={{textDecoration:"none"}}>Forgot your password?</a></p> */}
                                                 </div>
                                             </div>
                                         </div>

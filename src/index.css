@@ -41,3 +41,8 @@ code {
 i {
   cursor: pointer;
 }
+
+#account {
+  filter: invert(90%) sepia(9%) saturate(1430%) hue-rotate(341deg) brightness(101%) contrast(113%);
+  cursor: pointer;
+}

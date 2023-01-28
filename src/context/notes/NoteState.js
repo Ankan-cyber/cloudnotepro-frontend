@@ -7,6 +7,7 @@ const NoteState = (props) => {
     const host = "http://localhost:5000"
     const [notes, setNotes] = useState([]);
     const [loaded, setLoaded] = useState(false)
+    const [user, setUser] = useState({ name: "", email: "" })
 
     // Add a note
     const fetchNotes = async () => {
@@ -129,8 +130,61 @@ const NoteState = (props) => {
         }
     }
 
+    //Get User Details
+    const getUser = async () => {
+
+        //Api Call
+        const response = await fetch(`${host}/api/auth/getuser`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localStorage.getItem('token')
+            }
+        });
+        const json = await response.json();
+        if (json.success) {
+            setUser({ name: json.user.name, email: json.user.email })
+        }
+        else {
+            toast.error(json.msg, {
+                theme: "colored",
+                autoClose: 3000
+            });
+        }
+    }
+
+    //Get User Details
+    const changePassword = async (name, oldpassword, newpassword) => {
+
+        //Api Call
+        const response = await fetch(`${host}/api/auth/changepassword`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': localStorage.getItem('token')
+            },
+            body: JSON.stringify({ name, oldpassword, newpassword })
+        });
+        const json = await response.json();
+        if (json.success) {
+            document.getElementById('accountbtn').innerText = "Redirecting ..."
+            toast.success(`${json.msg} Redirecting Now`, {
+                theme: "colored",
+                authClose: 3000
+            });
+            setTimeout(() => {
+                localStorage.removeItem('token')
+            }, 3000)
+        }
+        else {
+            toast.error(json.msg, {
+                theme: "colored",
+                autoClose: 3000
+            });
+        }
+    }
     return (
-        <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, fetchNotes, loaded }}>
+        <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, fetchNotes, loaded, getUser, user, changePassword }}>
             {props.children}
         </NoteContext.Provider>
     )
