@@ -3,7 +3,6 @@ import AddNote from './AddNote';
 import FetchNotes from './FetchNotes';
 import noteContext from '../context/notes/noteContext';
 import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Notes = () => {
@@ -73,7 +72,6 @@ const Notes = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
             <FetchNotes editNote={updateNote} />
         </>
     )

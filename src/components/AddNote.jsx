@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
 import noteContext from '../context/notes/noteContext';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddNote = () => {
@@ -41,7 +40,6 @@ const AddNote = () => {
                     </div>
                     <button type="submit" className="btn " onClick={handleClick} disabled={note.title.length <= 3 && note.description.length <= 5}>Add Note</button>
                 </form>
-                <ToastContainer />
             </div>
         </>
     )

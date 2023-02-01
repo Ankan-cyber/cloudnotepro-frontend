@@ -46,3 +46,34 @@ i {
   filter: invert(90%) sepia(9%) saturate(1430%) hue-rotate(341deg) brightness(101%) contrast(113%);
   cursor: pointer;
 }
+
+#accountWindow {
+  position: absolute;
+  background-color: inherit;
+  border: 1px solid gray;
+  padding: 10px;
+  z-index: 1;
+  border-radius: 10px;
+  color: inherit;
+  transition: all 0.3s;
+  width: 150px;
+}
+
+#accountWindow::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+  top: -10px;
+  left: 84%;
+  transform: translate(-50%, 0);
+}
+
+#myAccountLink, #logoutLink {
+  color: white;
+  text-decoration: none;
+}
+

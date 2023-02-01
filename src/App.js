@@ -7,6 +7,8 @@ import NoteState from './context/notes/NoteState';
 import Auth from './components/Auth';
 import Account from './components/Account';
 import Footer from './components/Footer';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const apiHost = "http://localhost:5000"
@@ -23,7 +25,8 @@ function App() {
               <Route exact path='/account' element={< Account />}></Route>
             </Routes>
           </div>
-          <Footer/>
+          <ToastContainer />
+          <Footer />
         </Router>
       </NoteState>
     </>

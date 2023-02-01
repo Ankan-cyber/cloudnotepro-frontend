@@ -3,7 +3,6 @@ import noteContext from "../context/notes/noteContext"
 import { useNavigate } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
 
 const Account = () => {
     const navigate = useNavigate();
@@ -64,7 +63,6 @@ const Account = () => {
                 </div>
                 <button type="submit" id="accountbtn" className="btn btn-primary">Submit</button>
             </form>
-            <ToastContainer />
         </>
     )
 }

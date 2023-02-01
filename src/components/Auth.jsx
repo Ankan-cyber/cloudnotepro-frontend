@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import '../css/Login.css'
 import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -202,7 +201,6 @@ const Auth = (props) => {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
         </>
     )
 }
