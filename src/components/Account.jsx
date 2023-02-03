@@ -16,7 +16,8 @@ const Account = () => {
         } else {
             navigate('/auth');
         }
-    }, [navigate, getUser])
+        // eslint-disable-next-line
+    }, [navigate])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
