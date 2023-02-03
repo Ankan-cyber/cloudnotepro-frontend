@@ -3,6 +3,7 @@ import '../css/Login.css'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const Auth = (props) => {
 
@@ -162,7 +163,7 @@ const Auth = (props) => {
                                                         <i className="input-icon uil uil-lock-alt"></i>
                                                     </div>
                                                     <button className="btn mt-4 button" onClick={handleLogin}>Login</button>
-                                                    {/* <p class="mb-0 mt-4 text-center"><a href="#0" class="link" style={{textDecoration:"none"}}>Forgot your password?</a></p> */}
+                                                    <p className="mb-0 mt-4 text-center"><Link to="/resetpassword" className="link" style={{ textDecoration: "none" }}>Forgot your password?</Link></p>
                                                 </div>
                                             </div>
                                         </div>

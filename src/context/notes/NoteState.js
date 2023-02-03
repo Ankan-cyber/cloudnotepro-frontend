@@ -183,8 +183,59 @@ const NoteState = (props) => {
             });
         }
     }
+    //Send Reset Password Mail
+    const mailReset = async (email) => {
+
+        //Api Call
+        const response = await fetch(`${host}/api/auth/mailreset`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email })
+        });
+        const json = await response.json();
+        if (json.success) {
+            toast.success(`${json.msg}`, {
+                theme: "colored",
+                authClose: 3000
+            });
+        }
+        else {
+            toast.error(json.error, {
+                theme: "colored",
+                autoClose: 3000
+            });
+        }
+    }
+    //Send Reset Password Mail
+    const resetPassword = async (id, token, password) => {
+
+        //Api Call
+        const response = await fetch(`${host}/api/auth/resetpassword`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id, token, password })
+        });
+        const json = await response.json();
+        if (json.success) {
+            toast.success(`${json.msg}`, {
+                theme: "colored",
+                authClose: 3000
+            });
+        }
+        else {
+            toast.error(json.error, {
+                theme: "colored",
+                autoClose: 3000
+            });
+        }
+    }
+
     return (
-        <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, fetchNotes, loaded, getUser, user, changePassword }}>
+        <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, fetchNotes, loaded, getUser, user, changePassword, mailReset, resetPassword }}>
             {props.children}
         </NoteContext.Provider>
     )

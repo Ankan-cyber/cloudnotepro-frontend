@@ -7,6 +7,8 @@ import NoteState from './context/notes/NoteState';
 import Auth from './components/Auth';
 import Account from './components/Account';
 import Footer from './components/Footer';
+import Resetpassword from './components/Resetpassword';
+import Verifyandresetpassword from './components/Verifyandresetpassword';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,6 +25,8 @@ function App() {
               <Route exact path='/about' element={< About />}></Route>
               <Route exact path='/auth' element={< Auth apiHost={apiHost} />}></Route>
               <Route exact path='/account' element={< Account />}></Route>
+              <Route exact path='/resetpassword' element={< Resetpassword />}></Route>
+              <Route exact path='/verify' element={< Verifyandresetpassword apiHost={apiHost} />}></Route>
             </Routes>
           </div>
           <ToastContainer />
